@@ -11,9 +11,6 @@
  * 
  * Default interval: 60 seconds
  */
-
-const http = require('http');
-
 const INTERVAL = parseInt(process.argv[2]) || 60; // Default 60 seconds
 const API_URL = process.env.API_URL || 'http://localhost:3000/api/execute-proposals';
 

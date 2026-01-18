@@ -2,9 +2,68 @@ import { NextRequest, NextResponse } from 'next/server';
 import { ethers } from 'ethers';
 import { FORWARDER_ABI } from '@/lib/abi';
 
+type ForwardRequestInput = {
+  from: string;
+  to: string;
+  value: string;
+  gas: string;
+  nonce: string;
+  data: string;
+};
+
+type ForwardRequestPayload = {
+  request: ForwardRequestInput;
+  signature: string;
+};
+
+const isForwardRequestInput = (value: unknown): value is ForwardRequestInput => {
+  if (!value || typeof value !== 'object') {
+    return false;
+  }
+
+  const record = value as Record<string, unknown>;
+  return (
+    typeof record.from === 'string' &&
+    typeof record.to === 'string' &&
+    typeof record.value === 'string' &&
+    typeof record.gas === 'string' &&
+    typeof record.nonce === 'string' &&
+    typeof record.data === 'string'
+  );
+};
+
+const isForwardRequestPayload = (value: unknown): value is ForwardRequestPayload => {
+  if (!value || typeof value !== 'object') {
+    return false;
+  }
+
+  const record = value as Record<string, unknown>;
+  return typeof record.signature === 'string' && isForwardRequestInput(record.request);
+};
+
+const toErrorMessage = (error: unknown) => {
+  if (error instanceof Error && typeof error.message === 'string') {
+    return error.message;
+  }
+  if (typeof error === 'string') {
+    return error;
+  }
+  try {
+    return JSON.stringify(error);
+  } catch {
+    return 'Unknown error';
+  }
+};
+
 export async function POST(request: NextRequest) {
   try {
-    const { request: forwardRequest, signature } = await request.json();
+    const payload = await request.json();
+
+    if (!isForwardRequestPayload(payload)) {
+      return NextResponse.json({ error: 'Invalid request payload' }, { status: 400 });
+    }
+
+    const { request: forwardRequest, signature } = payload;
 
     const RPC_URL = process.env.RPC_URL || 'http://127.0.0.1:8545';
     const RELAYER_PRIVATE_KEY = process.env.RELAYER_PRIVATE_KEY;
@@ -50,10 +109,11 @@ export async function POST(request: NextRequest) {
       txHash: receipt.hash,
       blockNumber: receipt.blockNumber,
     });
-  } catch (error: any) {
-    console.error('Relay error:', error);
+  } catch (error: unknown) {
+    const message = toErrorMessage(error);
+    console.error('Relay error:', message);
     return NextResponse.json(
-      { error: error.message || 'Failed to relay transaction' },
+      { error: message || 'Failed to relay transaction' },
       { status: 500 }
     );
   }

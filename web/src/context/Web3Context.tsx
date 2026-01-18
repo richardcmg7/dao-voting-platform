@@ -3,6 +3,7 @@
 import React, { createContext, useContext, useState, useEffect, useCallback, ReactNode } from 'react';
 import { ethers, BrowserProvider } from 'ethers';
 import { DAO_ABI, FORWARDER_ABI } from '@/lib/abi';
+import { toErrorMessage } from '@/lib/errors';
 
 interface Web3ContextType {
   account: string | null;
@@ -60,9 +61,10 @@ export const Web3Provider = ({ children }: { children: ReactNode }) => {
         
         // Guardar que el usuario se conectó
         localStorage.setItem('walletConnected', 'true');
-      } catch (error: any) {
-        console.error('Error connecting wallet:', error);
-        alert('Failed to connect wallet: ' + (error.message || 'Unknown error'));
+      } catch (error: unknown) {
+        const message = toErrorMessage(error);
+        console.error('Error connecting wallet:', message);
+        alert('Failed to connect wallet: ' + (message || 'Unknown error'));
       }
     } else {
       alert('Please install MetaMask!');
@@ -111,7 +113,7 @@ export const Web3Provider = ({ children }: { children: ReactNode }) => {
             setForwarderContract(forwarder);
           }
         } catch (error) {
-          console.error('Auto-reconnect failed:', error);
+          console.error('Auto-reconnect failed:', toErrorMessage(error));
         }
       }
     };
@@ -138,7 +140,7 @@ export const Web3Provider = ({ children }: { children: ReactNode }) => {
             setDaoContract(dao);
             setForwarderContract(forwarder);
           } catch (error) {
-            console.error('Error updating account:', error);
+            console.error('Error updating account:', toErrorMessage(error));
           }
         } else {
           disconnectWallet();
@@ -157,7 +159,7 @@ export const Web3Provider = ({ children }: { children: ReactNode }) => {
         window.ethereum.removeListener('chainChanged', handleChainChanged);
       };
     }
-  }, [DAO_ADDRESS, FORWARDER_ADDRESS]);
+  }, [DAO_ADDRESS, FORWARDER_ADDRESS, disconnectWallet]);
 
   return (
     <Web3Context.Provider

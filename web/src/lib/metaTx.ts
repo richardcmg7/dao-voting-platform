@@ -9,13 +9,6 @@ export interface ForwardRequest {
   data: string;
 }
 
-const EIP712_DOMAIN_TYPE = [
-  { name: 'name', type: 'string' },
-  { name: 'version', type: 'string' },
-  { name: 'chainId', type: 'uint256' },
-  { name: 'verifyingContract', type: 'address' },
-];
-
 const FORWARD_REQUEST_TYPE = [
   { name: 'from', type: 'address' },
   { name: 'to', type: 'address' },
