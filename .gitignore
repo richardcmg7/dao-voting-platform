@@ -1,0 +1,48 @@
+# Dependencies
+node_modules/
+# package-lock.json
+
+# Build outputs
+.next/
+out/
+dist/
+build/
+
+# Environment variables
+.env
+.env.local
+.env*.local
+
+# Foundry
+sc/out/
+sc/cache/
+sc/broadcast/
+sc/lib/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Testing
+coverage/
+.nyc_output/
+playwright-report/
+test-results/
+.playwright/
+
+# Misc
+*.pem
+.vercel

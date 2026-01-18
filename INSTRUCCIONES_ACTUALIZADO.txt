@@ -1,0 +1,63 @@
+═══════════════════════════════════════════════════════════════
+  ✅ INSTRUCCIONES ACTUALIZADAS
+═══════════════════════════════════════════════════════════════
+
+PARA REINICIAR LA APLICACIÓN:
+
+1. DETÉN EL SERVIDOR ACTUAL:
+   Presiona Ctrl+C en la terminal donde corre Next.js
+
+2. EJECUTA EL NUEVO SCRIPT:
+   cd /home/rc7/WEB3/dao-voting-platform
+   ./deploy-and-start.sh
+
+   Este script va a:
+   ✓ Verificar que Anvil esté corriendo
+   ✓ Desplegar los contratos
+   ✓ Extraer las direcciones automáticamente
+   ✓ Actualizar .env.local
+   ✓ Iniciar Next.js
+
+3. VERIFICA QUE LAS DIRECCIONES SE GUARDARON:
+   cat web/.env.local
+   
+   Deberías ver las direcciones 0x... llenas
+
+4. ABRE http://localhost:3000
+
+═══════════════════════════════════════════════════════════════
+
+CAMBIOS QUE HICE:
+
+✓ Arreglé Tailwind CSS v4 (ahora los estilos funcionan)
+✓ Arreglé el Web3Context (ahora conecta bien)
+✓ Mejoré el script de deployment
+✓ Agregué mejor manejo de errores
+
+═══════════════════════════════════════════════════════════════
+
+SI EL BOTÓN "CONNECT WALLET" NO FUNCIONA:
+
+1. Abre la consola del navegador (F12)
+2. Ve a Console
+3. Intenta conectar
+4. Busca errores que digan:
+   - "Contract addresses not configured"
+   - "ethereum is undefined"
+   - "Invalid address"
+
+Compárteme el error y lo arreglo
+
+═══════════════════════════════════════════════════════════════
+
+METAMASK:
+
+Red Anvil Local:
+  • Network Name: Anvil Local
+  • RPC: http://127.0.0.1:8545
+  • Chain ID: 31337
+
+Cuenta:
+  • 0x5de4111afa1a4b94908f83103eb1f1706367c2e68ca870fc3fb9a804cdab365a
+
+═══════════════════════════════════════════════════════════════

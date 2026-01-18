@@ -1,0 +1,48 @@
+═══════════════════════════════════════════════════════════════
+  🔄 CÓMO CAMBIAR DE CUENTA EN METAMASK
+═══════════════════════════════════════════════════════════════
+
+MÉTODO FÁCIL Y RÁPIDO:
+─────────────────────────────────────────────────────────────
+
+1. ABRE METAMASK
+   
+2. Click en los 3 PUNTOS (⋮) arriba a la derecha
+
+3. Click en "Connected sites" (Sitios conectados)
+
+4. Busca "localhost" en la lista
+
+5. Click en "Disconnect" o el ícono de basura 🗑️
+
+6. CIERRA la pestaña del navegador (localhost:3000)
+
+7. CAMBIA a la cuenta que quieres en MetaMask
+
+8. ABRE una nueva pestaña: http://localhost:3000
+
+9. Click "Connect Wallet"
+
+10. ✅ Ahora te preguntará qué cuenta usar
+
+═══════════════════════════════════════════════════════════════
+
+ALTERNATIVA MÁS RÁPIDA:
+─────────────────────────────────────────────────────────────
+
+Si tu cuenta actual YA TIENE 50 ETH (verificado con cast):
+
+1. Solo RECARGA la página (F5)
+
+2. Deposita 10 ETH al DAO
+
+3. ¡Listo! No necesitas cambiar de cuenta
+
+═══════════════════════════════════════════════════════════════
+
+RECUERDA:
+• Tu cuenta: 0x8a0b...4272
+• Balance actual: 50 ETH ✅
+• Ya puedes depositar sin problemas
+
+═══════════════════════════════════════════════════════════════
